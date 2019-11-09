@@ -14,7 +14,7 @@
                 <b-form-input 
                   id="input-1" 
                   required
-                  placeholder="Enter name or number" 
+                  placeholder="请输入您的密码或用户名" 
                   v-model="form.username" ></b-form-input>
             </b-form-group>
             
@@ -23,7 +23,7 @@
                 label="密码"
                 label-for="input-2"
             >
-            <b-form-input type="password" id="input-2" required placeholder="Enter password" v-model="form.password" ></b-form-input>
+            <b-form-input type="password" id="input-2" required placeholder="请输入您的密码" v-model="form.password" ></b-form-input>
             </b-form-group>
 
             <b-form-group id="input-group-3">
@@ -42,6 +42,18 @@
     </html>
 </template>
 <script>
+  import axios from 'axios';
+  import qs from 'qs';
+  
+  export function maketoast(msg) {
+      this.$bvToast.toast(msg, {
+          title: `提示信息`,
+          toaster: "b-toaster-top-right",
+          variant: "success",
+          solid: true
+        })
+  }
+  //在组件中使用
   export default {
     data() {
       return {
@@ -55,7 +67,36 @@
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
-      }}
+        //alert(JSON.stringify(this.form))
+        axios.post("/user/sign_in?",qs.stringify({        
+          userName: this.form.username,
+          userPwd: this.form.password    
+        }),
+        { headers:{ 'Content-Type':'application/x-www-form-urlencoded' }},
+        )
+        .then((response) => {
+          console.log(response.data);
+          //alert(response.data.msg);
+          //makeToast(response.data.msg);
+          if(response.data.msg=="登录成功"){
+            this.$bvToast.toast(response.data.msg, {
+          title: `提示信息`,
+          toaster: "b-toaster-top-right",
+          variant: "success",
+          solid: true
+        })
+          }else{
+            this.$bvToast.toast(response.data.msg, {
+          title: `提示信息`,
+          toaster: "b-toaster-top-center",
+          variant: "danger",
+          solid: true
+        })
+          }
+        })
+        .catch((error)=> {
+          console.log(error);
+        });
+    }}
   }
 </script>

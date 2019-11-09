@@ -3,7 +3,7 @@
   <b-container class="justify-content-md-center" >
 
     <!--头部空白行 b-row-->
-    <b-row align-v="start" class="justify-content-md-center" style="height:150px;">
+    <b-row align-v="start" class="justify-content-md-center" style="height:100px;">
     </b-row>
 
     <!--中部登录注册框主体 b-row-->
