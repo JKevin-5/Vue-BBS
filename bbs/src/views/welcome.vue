@@ -21,7 +21,7 @@
             <b-col md="6" class="d-flex justify-content-center">
               <b-card-body style="max-height:700px;max-width: 400px">
                 <b-nav card-header tabs fill style="padding-top: 10px; padding-bottom: 30px">
-                  <b-nav-item active router-link to="signin">登录</b-nav-item> 
+                  <b-nav-item active router-link to="/">登录</b-nav-item> 
                   <b-nav-item  router-link to="signup">注册</b-nav-item>
                 </b-nav>
                 <keep-alive>

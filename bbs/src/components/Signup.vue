@@ -46,7 +46,7 @@
 
             <b-form-group id="input-group-5">
                 <b-form-checkbox-group v-model="form.checked" id="checkboxes-1" >
-                <b-form-checkbox value="agree" >同意《BISTU-BBS 用户协议》</b-form-checkbox>
+                <b-form-checkbox value="agree">同意《BISTU-BBS 用户协议》</b-form-checkbox>
                 </b-form-checkbox-group>
             </b-form-group>
             
@@ -136,17 +136,18 @@
         )
         .then((response) => {
           console.log(response.data);
-          //alert(response.data.msg);
+          alert(response.data.msg);
           this.$bvToast.toast(response.data.msg, {
-          title: `提示信息`,
+          title: `Variant ${response.data.msg || 'default'}`,
           toaster: "b-toaster-top-center",
           variant: "danger",
           solid: true
-        })
+          })
+          this.$router.push('/home')
         })
         .catch((error)=> {
           console.log(error);
-          //alert("注册出错了");
+          alert("注册出错了");
         });
       }}
   }

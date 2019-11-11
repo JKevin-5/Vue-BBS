@@ -84,7 +84,8 @@
           toaster: "b-toaster-top-right",
           variant: "success",
           solid: true
-        })
+         }),
+          this.$router.push('/home')
           }else{
             this.$bvToast.toast(response.data.msg, {
           title: `提示信息`,
