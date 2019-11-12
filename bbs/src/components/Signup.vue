@@ -136,14 +136,23 @@
         )
         .then((response) => {
           console.log(response.data);
-          alert(response.data.msg);
-          this.$bvToast.toast(response.data.msg, {
-          title: `Variant ${response.data.msg || 'default'}`,
-          toaster: "b-toaster-top-center",
-          variant: "danger",
-          solid: true
+          //alert(response.data.msg);
+          if(response.data.msg=="登录成功"){
+            this.$bvToast.toast(response.data.msg, {
+            title: `提示信息`,
+            toaster: "b-toaster-top-center",
+            variant: "success",
+            solid: true
           })
           this.$router.push('/home')
+          }else{
+            this.$bvToast.toast(response.data.msg, {
+            title: `提示信息`,
+            toaster: "b-toaster-top-center",
+            variant: "danger",
+            solid: true
+          })}
+          
         })
         .catch((error)=> {
           console.log(error);
