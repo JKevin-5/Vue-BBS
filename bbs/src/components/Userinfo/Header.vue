@@ -3,6 +3,9 @@
     <b-row >
         <!--头像-->
         <b-col md="2" class="pl-5 pt-3">
+            <!--
+              <b-form-file accept="image/*"></b-form-file>
+            -->
             <img src="@/assets/用户头像.svg"   class="img-circle" alt="Circle image">
         </b-col>
         <!--用户信息显示-->

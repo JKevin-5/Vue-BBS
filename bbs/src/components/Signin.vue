@@ -14,7 +14,7 @@
                 <b-form-input 
                   id="input-1" 
                   required
-                  placeholder="请输入您的密码或用户名" 
+                  placeholder="请输入您的学号" 
                   v-model="form.username" ></b-form-input>
             </b-form-group>
             

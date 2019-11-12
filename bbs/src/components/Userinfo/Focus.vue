@@ -1,3 +1,5 @@
 <template>
-    <h1>这里是关注界面</h1>
+    <b-card border-variant="light" header="我的关注">
+        
+    </b-card>
 </template>

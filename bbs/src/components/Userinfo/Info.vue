@@ -2,7 +2,6 @@
     <b-card border-variant="light" header="个人信息">
         <b-card-text>姓名：{{username}}</b-card-text>
         <b-card-text>学号：{{userStuNo}}</b-card-text>
-        
     </b-card>
     
 </template>

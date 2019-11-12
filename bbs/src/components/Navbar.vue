@@ -1,8 +1,9 @@
 <template>
   <b-navbar toggleable="lg" type="light" variant="light" position: sticky style="height:60px;width:1140px" class="shadow-sm p-3 mb-4 bg-white " >
-    <!--b-navbar-brand 头部导航栏Logo -->
+    <!--b-navbar-brand 头部导航栏Logo 
     <b-navbar-brand href="#" tag="h1" class="ml-1 mr-5 pt-1 pb-1 pl-3 pr-3" style="border: black solid thin;border-radius: 10px;font-weight:bold;font-family: Serif">BISTU BBS</b-navbar-brand>
-
+    -->
+    <b-navbar-brand > <img style="max-width:130px" src="@/assets/logo.png"></b-navbar-brand>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item router-link to="/home">首页</b-nav-item>
@@ -12,7 +13,6 @@
         <b-nav-item href="#">资源库</b-nav-item>
       </b-navbar-nav>
 
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto ">
         <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" placeholder="搜索其实很简单"></b-form-input>
@@ -27,7 +27,7 @@
             <em>User</em>
           </template>
           <b-dropdown-item router-link to="/home/userinfo">个人信息</b-dropdown-item>
-          <b-dropdown-item href="#">登出</b-dropdown-item>
+          <b-dropdown-item router-link to="/">登出</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>

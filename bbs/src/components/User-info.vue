@@ -11,14 +11,14 @@
     <!--左侧分页面栏-->
       <b-col md="1"></b-col> 
       <b-col md="2" >
-        <div style="background-color: white;  >">
-          <b-nav vertical class="text-center" >
-            <b-nav-item to="/home/userinfo" style="color:black">个人信息</b-nav-item>
-            <b-nav-item router-link to="/home/userinfo/focus">我的关注</b-nav-item>
+        <div >
+          <b-navbar-nav vertical class="text-center" type="light" >
+            <b-nav-item to="/home/userinfo" replace:false>个人信息</b-nav-item>
+            <b-nav-item to="/home/userinfo/focus" replace:false>我的关注</b-nav-item>
             <b-nav-item>我的发帖</b-nav-item>
             <b-nav-item>回复我的</b-nav-item>
             <b-nav-item>我的商城</b-nav-item>
-          </b-nav>
+          </b-navbar-nav>
         </div>
       </b-col>
       <!--右侧显示界面-->

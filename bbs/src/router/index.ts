@@ -10,7 +10,8 @@ import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import Info from '@/components/Userinfo/Info.vue'
 import Focus from '@/components/Userinfo/Focus.vue'
-        
+import DefaultView from '@/components/Forum/DefaultView.vue'
+
 // 通过use方法加载axios插件
 Vue.use(VueAxios,Axios);
 
@@ -28,7 +29,14 @@ const routes = [
       {
         path:'',
         name:'forum',
-        component: Forum
+        component: Forum,
+        children:[
+          {
+            path:'',
+            name:'default',
+            component: DefaultView
+          }
+        ]
       },{
         path:'userinfo',
         name:'userinfo',
@@ -48,10 +56,6 @@ const routes = [
     ]
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },{
     path:'/',
     name:'welcome',
     component: Welcome,

@@ -8,9 +8,11 @@
   </b-row>
 <!--动态面板-->
   <b-row align-v="center" >
+      <b-col md="1"></b-col>
       <b-col>
           <router-view></router-view>
       </b-col>
+      <b-col md="1"></b-col>
   </b-row>
 </b-container>
 
