@@ -13,11 +13,11 @@
       <b-col md="2" >
         <div >
           <b-navbar-nav vertical class="text-center" type="light" >
-            <b-nav-item to="/home/userinfo" replace:false>个人信息</b-nav-item>
-            <b-nav-item to="/home/userinfo/focus" replace:false>我的关注</b-nav-item>
-            <b-nav-item>我的发帖</b-nav-item>
-            <b-nav-item>回复我的</b-nav-item>
-            <b-nav-item>我的商城</b-nav-item>
+            <b-button to="/home/userinfo" class="m-2">个人信息</b-button>
+            <b-button to="/home/userinfo/focus" class="m-2">我的关注</b-button>
+            <b-button to="/home/userinfo/focus" class="m-2">我的发帖</b-button>
+            <b-button to="/home/userinfo/focus" class="m-2">回复我的</b-button>
+            <b-button to="/home/userinfo/focus" class="m-2">我的商城</b-button>
           </b-navbar-nav>
         </div>
       </b-col>

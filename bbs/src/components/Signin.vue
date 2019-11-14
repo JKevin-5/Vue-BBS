@@ -27,9 +27,9 @@
             </b-form-group>
 
             <b-form-group id="input-group-3">
-                <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
+                <b-form-checkbox-group v-model="form.checked" id="checkboxes-4" >
                 <b-form-checkbox value="Remember-username" >记住用户名</b-form-checkbox>
-                <b-form-checkbox value="Remember-userpassword">记住密码</b-form-checkbox>
+                <b-form-checkbox value="Remember-userpassword" >记住密码</b-form-checkbox>
                 </b-form-checkbox-group>
             </b-form-group>
             
@@ -79,13 +79,11 @@
           //alert(response.data.msg);
           //makeToast(response.data.msg);
           if(response.data.msg=="登录成功"){
-            this.$bvToast.toast(response.data.msg, {
-          title: `提示信息`,
-          toaster: "b-toaster-top-right",
-          variant: "success",
-          solid: true
-         }),
-          this.$router.push('/home')
+            this.$cookies.set('user',response.data.data);
+            this.$cookies.config(60 * 10,'/');
+             //全局存储token/cookie
+            window.localStorage["user"] = JSON.stringify(response.data.data);
+            this.$router.push('/home/forum')
           }else{
             this.$bvToast.toast(response.data.msg, {
           title: `提示信息`,

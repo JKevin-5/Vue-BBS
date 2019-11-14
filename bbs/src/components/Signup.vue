@@ -45,7 +45,7 @@
             </b-form-group>
 
             <b-form-group id="input-group-5">
-                <b-form-checkbox-group v-model="form.checked" id="checkboxes-1" >
+                <b-form-checkbox-group v-model="form.checked" id="checkboxes-1" required>
                 <b-form-checkbox value="agree">同意《BISTU-BBS 用户协议》</b-form-checkbox>
                 </b-form-checkbox-group>
             </b-form-group>
@@ -144,7 +144,7 @@
             variant: "success",
             solid: true
           })
-          this.$router.push('/home')
+          this.$router.push('/home/forum')
           }else{
             this.$bvToast.toast(response.data.msg, {
             title: `提示信息`,

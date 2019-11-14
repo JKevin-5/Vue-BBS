@@ -27,6 +27,9 @@ export default {
   components: {
     Navbar,
     Header
+  },
+  mounted(){
+    console.log(this.$cookies.get('user'));
   }
 }
 </script>

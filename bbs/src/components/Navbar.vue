@@ -6,8 +6,8 @@
     <b-navbar-brand > <img style="max-width:130px" src="@/assets/logo.png"></b-navbar-brand>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item router-link to="/home">首页</b-nav-item>
-        <b-nav-item router-link to="/home">论坛</b-nav-item>
+        <b-nav-item router-link to="/home/forum">首页</b-nav-item>
+        <b-nav-item router-link to="/home/forum/lists">论坛</b-nav-item>
         <b-nav-item href="#">线下活动</b-nav-item>
         <b-nav-item href="#">二手市场</b-nav-item>
         <b-nav-item href="#">资源库</b-nav-item>
@@ -24,13 +24,37 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
-            <em>User</em>
+            <em>{{userName}}</em>
           </template>
           <b-dropdown-item router-link to="/home/userinfo">个人信息</b-dropdown-item>
-          <b-dropdown-item router-link to="/">登出</b-dropdown-item>
+          <b-dropdown-item  @click="signOut">登出</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 
 </template>
+<script>
+export default {
+  data(){
+    return {
+      userName: ''
+    }
+  },
+  mounted(){
+      if($cookies.isKey('user')){
+        this.userName = this.$cookies.get('user').userNickName
+      }else{
+        this.userName = 'User'
+      }
+  },
+  methods:{
+    signOut: function(){
+      this.$cookies.remove('user');
+      window.localStorage.removeItem('user');
+      this.$router.push('/');
+      
+    }
+  }
+}
+</script>

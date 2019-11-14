@@ -10,10 +10,12 @@ import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import Info from '@/components/Userinfo/Info.vue'
 import Focus from '@/components/Userinfo/Focus.vue'
-import DefaultView from '@/components/Forum/DefaultView.vue'
+import List from '../components/List.vue'
+import About from '../components/About.vue'
 
 // 通过use方法加载axios插件
 Vue.use(VueAxios,Axios);
+
 
 Axios.defaults.baseURL = 'http://123.207.219.166:8080';
 
@@ -25,16 +27,19 @@ const routes = [
     path: '/home',
     name: 'home',
     component: Home,
+    meta: {
+      requireAuth: true,  // 该路由项需要权限校验
+    },
     children: [
       {
-        path:'',
+        path:'forum',
         name:'forum',
         component: Forum,
         children:[
           {
-            path:'',
-            name:'default',
-            component: DefaultView
+            path:'lists',
+            name:'lists',
+            component: List
           }
         ]
       },{
@@ -52,6 +57,10 @@ const routes = [
             component: Focus
           }
         ]
+      },{
+        path:'about',
+        name:'lists',
+        component: About
       }
     ]
   },
@@ -77,6 +86,23 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+    if(localStorage.user){
+      console.log("cookie存在");
+      next();
+    }else{
+      console.log("cookie不存在");
+      next({
+        path: '/', // 将跳转的路由path作为参数，登录成功后跳转到该路由
+        query: {redirect: to.fullPath}
+      })
+    }
+  }else{//如果不需要权限校验，直接进入路由界面
+    next();
+  }
 })
 
 export default router
