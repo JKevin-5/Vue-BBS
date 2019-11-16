@@ -6,7 +6,7 @@
         <b-row v-if="change" md="12" class="justify-content-md-center p-3"> 
             <b-button  @click="show=true">发布帖子</b-button>
             <!-- 发帖模态框 -->
-            <b-modal v-model="show" id="modal-center" hide-footer  centered title="编辑帖子" @show="resetModal" @hidden="sendPost" >
+            <b-modal v-model="show" id="modal-center" hide-footer  centered title="编辑帖子" @show="resetModal" @hidden="resetModal" >
                 <form ref="form" @submit="sendPost">
                     <b-form-group label="分区">
                         <b-form-text>{{smItems.smName}}</b-form-text>
@@ -25,7 +25,7 @@
                         </b-form-textarea>
                     </b-form-group>
                     <b-form-group id="input-group-4" >
-                        <b-button type="button" @click="show=false" variant="primary" >提交</b-button>
+                        <b-button type="button" @click="sendPost" variant="primary" >提交</b-button>
                     </b-form-group>
                 </form>
             </b-modal>
@@ -68,7 +68,7 @@ export default {
             smName: '',
             smDesc: '',
             modalState: null,
-            userID: 24,
+            userID: this.$cookies.get('user').userId,
             form: {
                 postTitle: '',
                 postDesc: ''
@@ -100,12 +100,11 @@ export default {
     Onclick: function (num) {
       this.smItems=num
       this.change=true
-      //this.$router.push({path:`/home/lists/${num}`});
     },
     //重置发帖模态框表单
     resetModal(){
         this.form.postTitle = '',
-        this.form.postText = '',
+        this.form.postDesc = '',
         this.modalState = null
     },
     //发送帖子信息
@@ -121,25 +120,35 @@ export default {
             postTitle: this.form.postTitle,
             postDesc: this.form.postDesc,
             postSmIdRef: this.smItems.smId,
-            postUserIdRef: 24
+            postUserIdRef: this.$cookies.get('user').userId
           }
         })
         .then((response) => {
           console.log(response.data);
+          this.show=false;
+          this.form.postTitle = '';
+          this.form.postDesc = '';
            this.update = false;
             // 在组件移除后，重新渲染组件
             // this.$nextTick可实现在DOM 状态更新后，执行传入的方法。
             this.$nextTick(() => {
                 this.update = true});
+          if(response.data.code==200){
           this.$bvToast.toast(response.data.msg, {
             title: `提示信息`,
             toaster: "b-toaster-top-center",
             variant: "success",
             solid: true
-          });
+          });}else{
+              his.$bvToast.toast(response.data.msg, {
+            title: `提示信息`,
+            toaster: "b-toaster-top-center",
+            variant: "danger",
+            solid: true
+          })
+          }
           
-          this.form.postTitle = '';
-          this.form.postText = '';
+          
          })
         }
         

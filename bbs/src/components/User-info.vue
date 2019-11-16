@@ -15,7 +15,7 @@
           <b-navbar-nav vertical class="text-center" type="light" >
             <b-button to="/home/userinfo" class="m-2">个人信息</b-button>
             <b-button to="/home/userinfo/focus" class="m-2">我的关注</b-button>
-            <b-button to="/home/userinfo/focus" class="m-2">我的发帖</b-button>
+            <b-button to="/home/userinfo/fans" class="m-2">我的粉丝</b-button>
             <b-button to="/home/userinfo/focus" class="m-2">回复我的</b-button>
             <b-button to="/home/userinfo/focus" class="m-2">我的商城</b-button>
           </b-navbar-nav>
@@ -33,10 +33,26 @@
 <script>
 // @ is an alias to /src
 import Header from '@/components/Userinfo/Header.vue'
+import axios from 'axios'
 
 export default {
+  data(){
+    return{
+      user: ''
+    }
+  },
   components: {
     Header
-  }
+  },
+  mounted(){
+      axios.get("/user/"+this.$cookies.get('user').userId)
+            .then(response => (
+                this.user = response.data.data
+                //console.log(this.user)
+                ))
+            .catch(error => console.log(error),
+            
+            )
+    }
 }
 </script>

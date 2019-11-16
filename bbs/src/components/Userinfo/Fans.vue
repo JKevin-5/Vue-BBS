@@ -23,7 +23,7 @@ export default {
         }
     },
     mounted(){
-        axios.get("/user/idols/"+this.$cookies.get('user').userId)
+        axios.get("/user/fans/"+this.$cookies.get('user').userId)
             .then(response => (
                 this.focus = response.data.data
                 //console.log(this.focus)

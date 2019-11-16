@@ -12,6 +12,7 @@ import Info from '@/components/Userinfo/Info.vue'
 import Focus from '@/components/Userinfo/Focus.vue'
 import List from '../components/List.vue'
 import About from '../components/About.vue'
+import Fans from '@/components/Userinfo/Fans.vue'
 
 // 通过use方法加载axios插件
 Vue.use(VueAxios,Axios);
@@ -55,6 +56,10 @@ const routes = [
             path:'focus',
             name:'focus',
             component: Focus
+          },{
+            path:'fans',
+            name:'fans',
+            component: Fans
           }
         ]
       },{

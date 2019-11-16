@@ -29,7 +29,7 @@ export default {
     Header
   },
   mounted(){
-    console.log(this.$cookies.get('user'));
+    //console.log(this.$cookies.get('user'));
   }
 }
 </script>
