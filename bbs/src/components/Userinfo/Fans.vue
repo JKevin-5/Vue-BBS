@@ -3,10 +3,12 @@
         <b-row v-for="focu in focus.items" :key="focu.userId">
             <b-card>
             <b-col>
-                <b-img :src="'http://123.207.219.166:8080/'+focu.userPicture" rounded="circle" ></b-img>
+                <b-img :src="'http://123.207.219.166:8080/'+focu.userPicture" rounded="circle" width="80" height="80" ></b-img>
             </b-col>
             <b-col>
-                <b-form-text>{{focu.userNickName}}</b-form-text>
+                <b-row class="justify-content-md-center">
+                    <b-form-text>{{focu.userNickName}}</b-form-text>
+                </b-row>
             </b-col>
             </b-card>
         </b-row>

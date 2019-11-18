@@ -16,7 +16,6 @@
             <b-button to="/home/userinfo" class="m-2">个人信息</b-button>
             <b-button to="/home/userinfo/focus" class="m-2">我的关注</b-button>
             <b-button to="/home/userinfo/fans" class="m-2">我的粉丝</b-button>
-            <b-button to="/home/userinfo/focus" class="m-2">回复我的</b-button>
             <b-button to="/home/userinfo/focus" class="m-2">我的商城</b-button>
           </b-navbar-nav>
         </div>

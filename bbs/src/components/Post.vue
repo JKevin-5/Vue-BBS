@@ -1,16 +1,19 @@
 <template>
   <b-container fluid>
+      <b-row>
+          <b-link @click="back">返回</b-link>
+      </b-row>
     <!-- 顶部置顶楼信息 -->
-    <b-row class=" shadow p-4 mb-5 bg-white rounded "  >
+    <b-row class=" shadow pl-4 pr-4 pb-4 pt-2 mb-5 bg-white rounded "  >
         <b-col>
             <b-row>
-                <b-card-text style="font-weight:bold;font-family: Serif;font-size: 30px;">{{data.items.postTitle}}<hr class="my-1" style="background-color: black"></b-card-text>
+                <b-card-text style="font-weight:bold;font-family: Serif;font-size: 30px;">{{data.items.postTitle}}<hr class="my-1" style=""></b-card-text>
             </b-row>
             <b-row>
-                <b-button  variant="outline-primary" size="sm" @click="changeFocusTop"  >{{focusTop}}</b-button>
+                <b-button  variant="outline-primary" size="sm" @click="changeFocusTop" class="p-1 ">{{focusTop}}</b-button>
             </b-row>
             <b-row>
-                <p>{{data.items.postDesc}}</p>
+                <p class="m-2">{{data.items.postDesc}}</p>
             </b-row>
             <b-row>
                 <b-col align-self='end'></b-col>
@@ -25,9 +28,7 @@
                 
             </b-row>
         </b-col>
-        
-        
-        
+          
     </b-row >
     <!-- 中部回复楼层信息 -->
     <b-row v-for="card in data.items.cards" :key="card.cardId" class="mb-2">
@@ -57,6 +58,10 @@
             <b-col md="2"></b-col>
             <!-- 评论该楼层 -->
             <b-col md="9" >
+                <b-row v-for="cardComm in card.cardComms" :key="cardComm.cardCommId" class="pt-2 pl-3" >
+                    <b-card-text class="pr-2" style="font-weight:bold;font-family: Serif;font-size: 15px;">{{cardComm.user.userNickName}}:</b-card-text>
+                    <b-card-text style="font-size: 14px;">{{cardComm.cardCommDesc}}<hr class="my-1" ></b-card-text>
+                </b-row>
                 <b-row class="pt-2 ">
                     <b-col md="10">
                         <b-form-input size="sm" v-model="text" placeholder="吐槽下"></b-form-input>
@@ -64,10 +69,6 @@
                     <b-col md="2">
                         <b-button variant="outline-primary" size="sm" @click="sendComment(card)">发送</b-button>
                     </b-col>
-                </b-row>
-                <b-row v-for="cardComm in card.cardComms" :key="cardComm.cardCommId" class="pt-2 pl-3" >
-                    <b-card-text class="pr-2" style="font-weight:bold;font-family: Serif;font-size: 15px;">{{cardComm.user.userNickName}}:</b-card-text>
-                    <b-card-text style="font-size: 14px;">{{cardComm.cardCommDesc}}<hr class="my-1" ></b-card-text>
                 </b-row>
             </b-col>
             </b-row>
@@ -122,7 +123,7 @@ export default {
                         userFocus:''
                     }
                 }
-            }   
+            }
         }
     },
     mounted(){
@@ -137,6 +138,9 @@ export default {
             )
     },
     methods:{
+        back:function(){
+            this.$router.go(-1);//返回上一层
+        },
         //取关/关注人
         changeFocusUser:function(userId){
         this.$axios({
@@ -233,7 +237,7 @@ export default {
         //回复置顶楼
         sendFloor:function (){
             if(this.floorComment!=''){
-                this.$axios({
+        this.$axios({
           method:"put",
           url:"/card",
           headers:{

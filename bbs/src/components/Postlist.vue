@@ -22,10 +22,14 @@
                   <b-img :src="'http://123.207.219.166:8080/'+post.user.userPicture" width="80" alt="placeholder" :title='post.user.userNickName'></b-img>
                 </template>
                 <h4 class="mt-0 mb-3" @click="onClick(post.postId)" >{{post.postTitle}}</h4>
-                <p class="mb-2 ml-1">{{post.user.userNickName}}：{{post.postDesc}}</p>
-                <hr class="my-1">
+                <p class="mb-4 ml-1 mt-2">{{post.user.userNickName}}：{{post.postDesc}}</p>
+                <hr class="mb-0 mt-2">
                 </b-media>
-                <b-card-text class="mt-2" >{{post.postCreateTime}}</b-card-text>
+                <b-row class="mt-2">
+                <b-card-text class="ml-3" >{{post.postCreateTime}}</b-card-text>
+                <b-col align-self='end'></b-col>
+                <b-link v-if="isCurrentUser(post.user.userId)" @click="deletePost(post.postId)" class="mr-5">删除</b-link>
+                </b-row>
                 </b-card>
               </b-col>
             </b-row>
@@ -39,10 +43,14 @@
                   <b-img :src="'http://123.207.219.166:8080/'+post.user.userPicture" width="80" alt="placeholder" :title='post.user.userNickName'></b-img>
                 </template>
                 <h4 class="mt-0 mb-3" @click="onClick(post.postId)">{{post.postTitle}}</h4>
-                <p class="mb-2 ml-1">{{post.user.userNickName}}：{{post.postDesc}}</p>
-                <hr class="my-1">
+                <p class="mb-4 ml-1 mt-2">{{post.user.userNickName}}：{{post.postDesc}}</p>
+                <hr class="mb-0 mt-2">
                 </b-media>
-                <b-card-text class="mt-2" >{{post.postCreateTime}}</b-card-text>
+                <b-row class="mt-2">
+                <b-card-text class="ml-3" >{{post.postCreateTime}}</b-card-text>
+                <b-col align-self='end'></b-col>
+                <b-link v-if="isCurrentUser(post.user.userId)" @click="deletePost(post.postId)" class="mr-5">删除</b-link>
+                </b-row>
                 </b-card>
               </b-col>
             </b-row>
@@ -54,6 +62,8 @@
 
 <script>
 import axios from 'axios';
+import qs from 'qs'
+inject: ['reload']
 
 export default {
     props: {
@@ -65,6 +75,9 @@ export default {
             posts: [],
             smId: '',
             smItems: [],
+            currentPage:'',
+            totalPage:'',
+            currentUserId:this.$cookies.get('user').userId,
             form: {
                 postTitle: '',
                 postDesc: ''
@@ -74,7 +87,7 @@ export default {
     watch: {
       inputData:{
 　　　　handler(newValue, oldValue) {
-          axios.get("/post?pageSize=100&smId="+this.inputData.smId)
+          axios.get("/post?pageSize=100&pageNum=1&smId="+this.inputData.smId)
             .then(response => (
                 this.posts = response.data.data
                 ))
@@ -87,7 +100,7 @@ export default {
         
     },
     mounted () {
-      axios.get("/post?pageSize=100&smId="+this.inputData.smId)
+      axios.get("/post?pageSize=100&pageNum=1&smId="+this.inputData.smId)
             .then(response => (
                 this.posts = response.data.data
                 ))
@@ -96,8 +109,38 @@ export default {
             )
     },
     methods: {
+      //该帖是否是当前用户的帖子
+      isCurrentUser:function(postUserId) {
+        if(postUserId==this.$cookies.get('user').userId){
+          return true
+        }else{
+          return false
+        }
+      },
+      //删除帖子
+      deletePost(postId){
+        console.log(postId+" 当前"+this.$cookies.get('user').userId)
+        this.$axios({
+          method:"delete",
+          url:"/post",
+          headers:{
+            'Content-type':'application/json'
+          },
+          data:{
+            "postId": postId,
+            "postUserIdRef": this.$cookies.get('user').userId  
+          }
+        })
+        .then(response => (
+                console.log(response.data.msg),
+                this.$router.go(0)
+            ))
+        .catch(error => console.log(error)
+            )
+      },
+      //刷新界面
       reflash: function(){
-        axios.get("/post?pageSize=100&smId="+this.inputData.smId)
+        axios.get("/post?pageSize=100&pageNum=1&smId="+this.inputData.smId)
             .then(response => (
                 this.posts = response.data.data
                 ))
@@ -115,7 +158,7 @@ export default {
       this.$router.push('/home/post/'+id)
     },
     changePopular(){
-      axios.get("/post?pageSize=100&smId="+this.inputData.smId+"&findType=findByPopular")
+      axios.get("/post?pageSize=100&pageNum=1&smId="+this.inputData.smId+"&findType=findByPopular")
             .then(response => (
                 this.posts = response.data.data
                 ))
