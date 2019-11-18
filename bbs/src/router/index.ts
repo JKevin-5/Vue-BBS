@@ -1,18 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Welcome from '../views/welcome.vue'
-import Signin from '../components/Signin.vue'
-import Signup from '../components/Signup.vue'
-import Userinfo from '../components/User-info.vue'
+import Welcome from '../views/Welcome.vue'
+import Userinfo from '../components/Userinfo.vue'
 import Forum from '../components/Forum.vue'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import Info from '@/components/Userinfo/Info.vue'
 import Focus from '@/components/Userinfo/Focus.vue'
-import List from '../components/List.vue'
+import List from '../components/Postlist.vue'
 import About from '../components/About.vue'
 import Fans from '@/components/Userinfo/Fans.vue'
+import Post from "../components/Post.vue"
 
 // 通过use方法加载axios插件
 Vue.use(VueAxios,Axios);
@@ -64,26 +63,20 @@ const routes = [
         ]
       },{
         path:'about',
-        name:'lists',
+        name:'about',
         component: About
+      },{
+        path:'post/:id',
+        name:'post',
+        component: Post,
+        props: true
       }
     ]
   },
   {
     path:'/',
-    name:'welcome',
-    component: Welcome,
-    children: [
-      {
-        path:'',
-        name:'signin',
-        component: Signin
-      },{
-        path:'signup',
-        name:'signup',
-        component: Signup
-      }
-    ]
+    name:'Welcome',
+    component: Welcome
   }
 ]
 

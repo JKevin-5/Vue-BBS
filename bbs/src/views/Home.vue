@@ -7,7 +7,7 @@
       </b-col>
   </b-row>
 <!--动态面板-->
-  <b-row align-v="center" >
+  <b-row >
       <b-col md="1"></b-col>
       <b-col>
           <router-view></router-view>

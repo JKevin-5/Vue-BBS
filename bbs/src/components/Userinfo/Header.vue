@@ -4,7 +4,7 @@
         <!--头像-->
         <b-col md="2" class="pl-5 pt-4" >
             <div  style="position: relative;">
-            <b-img  :src="'http://123.207.219.166:8080/'+post.userPicture" rounded="circle" fluid alt="Responsive image" style="position: absolute;"></b-img>
+            <b-img  :src="'http://123.207.219.166:8080/'+post.userPicture" width="80" fluid alt="Responsive image" style="position: absolute;"></b-img>
             <b-form-file v-model="picture" accept=".jpg,.png,.gif" id="upload" style="padding-top:15px;opacity: 0;" @change="updatePicture"></b-form-file>
             </div>
         </b-col>

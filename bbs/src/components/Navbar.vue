@@ -1,13 +1,11 @@
 <template>
   <b-navbar toggleable="lg" type="light" variant="light" position: sticky style="height:60px;width:1140px" class="shadow-sm p-3 mb-4 bg-white " >
-    <!--b-navbar-brand 头部导航栏Logo 
-    <b-navbar-brand href="#" tag="h1" class="ml-1 mr-5 pt-1 pb-1 pl-3 pr-3" style="border: black solid thin;border-radius: 10px;font-weight:bold;font-family: Serif">BISTU BBS</b-navbar-brand>
-    -->
+
+    <!-- b-navbar-brand 头部导航栏Logo  -->
     <b-navbar-brand > <img style="max-width:130px" src="@/assets/logo.png"></b-navbar-brand>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item router-link to="/home/forum">首页</b-nav-item>
-        <b-nav-item router-link to="/home/forum/lists">论坛</b-nav-item>
+        <b-nav-item router-link to="/home/forum">论坛</b-nav-item>
         <b-nav-item href="#">线下活动</b-nav-item>
         <b-nav-item href="#">二手市场</b-nav-item>
         <b-nav-item href="#">资源库</b-nav-item>
@@ -22,7 +20,6 @@
         <img src="@/assets/消息.svg" alt="icon name">
         </b-button>
         <b-nav-item-dropdown right>
-          <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
             <em>{{userName}}</em>
           </template>
@@ -38,7 +35,7 @@
 export default {
   data(){
     return {
-      userName: ''
+      userName: '' //右上角用户名显示
     }
   },
   mounted(){

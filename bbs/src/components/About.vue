@@ -1,22 +1,17 @@
 <template>
-  <form ref="form" >
-                    <b-form-group label="标题">
-                        <b-form-input v-model="form.postTitle" placeholder="输入帖子标题" required="required"></b-form-input>    
-                    </b-form-group>
-                    <b-form-group label="发布内容" label-for="textarea"> 
-                        <b-form-textarea
-                        id="textarea"
-                        v-model="form.postDesc"
-                        placeholder="写点什么..."
-                        rows="3"
-                        required="required"
-                        max-rows="6">
-                        </b-form-textarea>
-                    </b-form-group>
-                    <b-form-group id="input-group-4" >
-                        <b-button style="summit"  @click="sendPost()" variant="primary" >提交</b-button>
-                    </b-form-group>
-                </form>
+  <b-card>
+    <b-media right-align vertical-align="center">
+    <template v-slot:aside>
+      <b-img blank blank-color="#ccc" width="80" alt="placeholder"></b-img>
+    </template>
+    <h5 class="mt-0 mb-1">Media object</h5>
+    <p class="mb-0">
+      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+      Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+      nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+    </p>
+  </b-media>
+  </b-card>
 </template>
 
 <script>
